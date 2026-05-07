@@ -1,127 +1,121 @@
 import React from "react";
-import { BsTelephone } from "react-icons/bs";
-import { AiOutlineMail, AiOutlineInstagram } from "react-icons/ai";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaFax } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 type Props = {};
 
 const Footer = (props: Props) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col  bottom-0">
       <div className=" bg-zinc-800 py-4">
         <div className="grid lg:grid-cols-4 items-start justify-between lg:px-24  px-12 gap-4">
           <div className=" mt-4">
             <h3 className="text-center text-2xl mt-2 text-gray-200 mb-4">
-              ΣΧΕΤΙΚΑ ΜΕ ΕΜΑΣ
+              {t("footer.aboutHeading")}
             </h3>
             <p className="text-gray-200 text-justify">
-              Με την Olympic Join Hellas επιθυμούμε να σας γνωρίσουμε την
-              εταιρεία μας η οποία λειτουργεί από το 1978 και αναλαμβάνει
-              επισκευές πλοίων, ειδικότερα δε ελασματουργικές και σωληνουργικές
-              εργασίες, καθώς επίσης κατασκευή αεραγωγών, μονώσεων και λεβήτων
-              σε όλους τους τύπους πλοίων.
+              {t("about.description1")}
             </p>
           </div>
           <div className="mt-4">
             <h2 className="text-center text-2xl mt-2 text-gray-200 mb-4">
-              ΜENOY
+              {t("footer.menuHeading")}
             </h2>
             <ul className="text-gray-200 list-disc text-center space-y-4 ">
               <li>
                 <a
-                  href="/"
+                  href="/#hero"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  ΑΡΧΙΚΗ
+                  {t("footer.menu.home")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#about"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Σχετικά με εμάς
+                  {t("footer.menu.about")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Υπηρεσίες
+                  {t("footer.menu.services")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#contact"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Επικοινωνία
+                  {t("footer.menu.contact")}
                 </a>
               </li>
             </ul>
           </div>
           <div className="mt-4">
             <h2 className="text-center text-2xl mt-2 text-gray-200 mb-4">
-              ΥΠΗΡΕΣΙΕΣ
+              {t("footer.servicesHeading")}
             </h2>
             <ul className="text-gray-200 list-disc text-center space-y-4">
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Σωληνουργικές εργασίες
+                  {t("services.pipefitting")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Επισκευές Boiler - Λέβητες (Καζάνια)
+                  {t("services.boiler")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Εξαερισμός
+                  {t("services.ventilation")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Μονώσεις πλοίων
+                  {t("services.insulation")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Επισκευές Inert Gas Generator
+                  {t("services.inertGas")}
                 </a>
               </li>
               <li>
                 <a
-                  href="/"
+                  href="/#services"
                   className="hover:text-[#326da8]/80 transition-all duration-300"
                 >
-                  Ειδικές Κατασκευές
+                  {t("services.special")}
                 </a>
               </li>
             </ul>
           </div>
           <div className="mt-4">
             <h3 className="text-center text-2xl mt-2 text-gray-200 mb-4">
-              ΕΠΙΚΟΙΝΩΝΙΑ
+              {t("footer.contactHeading")}
             </h3>
             <ul className="text-gray-200 list-none text-center space-y-4">
               <div className="flex flex-row justify-center items-center mt-2 space-x-2">
@@ -145,7 +139,7 @@ const Footer = (props: Props) => {
         </div>
       </div>
       <div className="bg-zinc-900">
-        <h3 className="text-center text-gray-100">All rights reserved</h3>
+        <h3 className="text-center text-gray-100">{t("footer.rights")}</h3>
       </div>
     </div>
   );

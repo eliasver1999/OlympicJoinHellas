@@ -51,7 +51,8 @@ export const ImageModal = ({ activeImage, images, open, setOpen }: Props) => {
             <div className="h-screen w-screen flex justify-center items-center">
               <img
                 src={activeImage}
-                alt={activeImage}
+                alt=""
+                decoding="async"
                 className="rounded-md w-1/2"
               />
             </div>

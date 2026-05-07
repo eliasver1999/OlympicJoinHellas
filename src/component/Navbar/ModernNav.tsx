@@ -3,8 +3,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./PhoneNavbar.css";
 
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useActiveSection } from "../../hooks/useActiveSection";
 
 type Props = {};
+
+const HOME_SECTIONS = ["hero", "about", "services", "contact"];
 const starting = {
   hidden: {
     opacity: 0,
@@ -206,6 +210,15 @@ const row3Right = {
 };
 const ModernNav = (props: Props) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { t } = useTranslation();
+  const active = useActiveSection(HOME_SECTIONS);
+
+  const linkClass = (section: string, width: string) =>
+    `${
+      active === section
+        ? "underline decoration-[#326da8]"
+        : "hover-underline-animation"
+    } text-[#e4e4e6] text-2xl ${width} text-center `;
 
   return (
     <div className="relative z-30 ">
@@ -301,7 +314,9 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/">Ελασματουργικές εργασίες</NavLink>
+                          <NavLink to="/elasmatourgikes">
+                            {t("services.platework")}
+                          </NavLink>
                         </motion.h4>
                       </motion.div>
                     </div>
@@ -325,7 +340,9 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/">Σωληνουργικές εργασίες</NavLink>
+                          <NavLink to="/#services">
+                            {t("services.pipefitting")}
+                          </NavLink>
                         </motion.h4>
                       </motion.div>
                       <motion.div
@@ -347,8 +364,8 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/" className="text-center">
-                            Επισκευές Boiler - Λέβητες (Καζάνια)
+                          <NavLink to="/#services" className="text-center">
+                            {t("services.boiler")}
                           </NavLink>
                         </motion.h4>
                       </motion.div>
@@ -373,8 +390,8 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/" className="text-center">
-                            Επισκευές Inert Gas Generator
+                          <NavLink to="/#services" className="text-center">
+                            {t("services.inertGas")}
                           </NavLink>
                         </motion.h4>
                       </motion.div>
@@ -397,8 +414,8 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/" className="text-center">
-                            Μονώσεις Πλοίων
+                          <NavLink to="/#services" className="text-center">
+                            {t("services.insulation")}
                           </NavLink>
                         </motion.h4>
                       </motion.div>
@@ -421,8 +438,8 @@ const ModernNav = (props: Props) => {
                           initial="initial"
                           whileHover="hover"
                         >
-                          <NavLink to="/" className="text-center">
-                            Εξαερισμός
+                          <NavLink to="/#services" className="text-center">
+                            {t("services.ventilation")}
                           </NavLink>
                         </motion.h4>
                       </motion.div>
@@ -443,55 +460,31 @@ const ModernNav = (props: Props) => {
                 <div className="h-full flex flex-col justify-center space-y-12 items-center bg-neutral-900">
                   <NavLink
                     onClick={() => setIsOpen(!isOpen)}
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#326da8]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-1/3 text-center `
-                    }
-                    to="/"
+                    className={linkClass("hero", "w-1/3")}
+                    to="/#hero"
                   >
-                    ΑΡΧΙΚΗ
+                    {t("nav.home")}
                   </NavLink>
                   <NavLink
                     onClick={() => setIsOpen(!isOpen)}
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#326da8]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-2/3 text-center `
-                    }
-                    to="/2"
+                    className={linkClass("about", "w-2/3")}
+                    to="/#about"
                   >
-                    ΠΟΙΟΙ ΕΙΜΑΣΤΕ
+                    {t("nav.about")}
                   </NavLink>
                   <NavLink
                     onClick={() => setIsOpen(!isOpen)}
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#326da8]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-2/3 text-center `
-                    }
-                    to="/2"
+                    className={linkClass("services", "w-2/3")}
+                    to="/#services"
                   >
-                    ΥΠΗΡΕΣΙΕΣ
+                    {t("nav.services")}
                   </NavLink>
                   <NavLink
                     onClick={() => setIsOpen(!isOpen)}
-                    className={({ isActive }) =>
-                      `${
-                        isActive
-                          ? "underline decoration-[#326da8]"
-                          : "hover-underline-animation"
-                      } text-[#e4e4e6] text-2xl w-2/3 text-center `
-                    }
-                    to="/2"
+                    className={linkClass("contact", "w-2/3")}
+                    to="/#contact"
                   >
-                    ΕΠΙΚΟΙΝΩΝΙΑ
+                    {t("nav.contact")}
                   </NavLink>
                 </div>
               </motion.div>

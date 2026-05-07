@@ -1,0 +1,90 @@
+{
+  "nav": {
+    "home": "HOME",
+    "about": "ABOUT US",
+    "services": "SERVICES",
+    "contact": "CONTACT"
+  },
+  "hero": {
+    "typewriter": [
+      "Welcome to Olympic Join Hellas",
+      "Pipefitting works",
+      "Boiler Repairs",
+      "Inert Gas Generator Repairs",
+      "Ship Insulations",
+      "Ventilation",
+      "Special Constructions"
+    ]
+  },
+  "about": {
+    "title": "Who We Are",
+    "description1": "With Olympic Join Hellas, we would like to introduce you to our company, which has been operating since 1978 and undertakes ship repairs, particularly platework and pipefitting works, as well as the construction of air ducts, insulations and boilers for all types of ships.",
+    "description2": "We collaborate with many Shipping Companies and our work has been distinguished for its quality, fast delivery time, and low cost."
+  },
+  "services": {
+    "title": "Services",
+    "platework": "Platework",
+    "pipefitting": "Pipefitting works",
+    "boiler": "Boiler Repairs",
+    "ventilation": "Ventilation",
+    "insulation": "Ship Insulations",
+    "inertGasShort": "Inert Gas Repairs",
+    "inertGas": "Inert Gas Generator Repairs",
+    "special": "Special Constructions"
+  },
+  "contact": {
+    "title": "Contact",
+    "where": "Where to find us",
+    "details": "Contact Details",
+    "form": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message...",
+      "send": "Send",
+      "errors": {
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email.",
+        "subjectRequired": "Subject is required",
+        "messageRequired": "Message is required"
+      }
+    }
+  },
+  "footer": {
+    "aboutHeading": "ABOUT US",
+    "menuHeading": "MENU",
+    "servicesHeading": "SERVICES",
+    "contactHeading": "CONTACT",
+    "menu": {
+      "home": "HOME",
+      "about": "About us",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "rights": "All rights reserved"
+  },
+  "gallery": {
+    "platework": "Platework"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "back": "Back to home"
+  },
+  "language": {
+    "switchTo": "ΕΛ"
+  },
+  "cookies": {
+    "message": "This website uses cookies and third-party embedded content (Google Maps) to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "map": {
+    "consentRequired": "Map display requires cookie consent.",
+    "loadMap": "Load map"
+  }
+}

@@ -7,7 +7,7 @@ type Props = {
 const Image = ({ url }: Props) => {
   return (
     <div>
-      <img src={url} />
+      <img src={url} alt="" loading="lazy" decoding="async" />
     </div>
   );
 };

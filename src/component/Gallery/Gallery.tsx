@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Gallery.css";
 import { GrFormNext } from "react-icons/gr";
 import { ImageModal } from "../Modal/ImageModal";
-import { calcLength, motion } from "framer-motion";
 
 type Props = {
   title: string;
@@ -34,29 +33,6 @@ function SamplePrevArrow(props: any) {
     ></div>
   );
 }
-const modal = {
-  hidden: {
-    y: "100vh",
-    opacity: 0,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: { delay: 0.1, type: "linear", y: { duration: 0.5 } },
-  },
-  exit: {
-    y: "200vh",
-    transition: { delay: 0.1, type: "linear", y: { duration: 0.5 } },
-  },
-  hover: {
-    rotateY: 180,
-    transition: {
-      delay: 0.1,
-      ease: "easeInOutCubicBezier",
-      rotateY: { duration: 1 },
-    },
-  },
-};
 export const Gallery = ({ title, images }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [activeImage, setActiveImage] = React.useState("");
@@ -106,19 +82,23 @@ export const Gallery = ({ title, images }: Props) => {
         <Slider {...settings}>
           {images.map((image) => {
             return (
-              <div>
-                <div
-                  className="h-[300px]  p-1 rounded-lg cursor-pointer"
-                  style={{
-                    backgroundImage: `url(${image})`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                  }}
+              <div key={image}>
+                <button
+                  type="button"
+                  className="h-[300px] w-full p-1 rounded-lg cursor-pointer overflow-hidden"
                   onClick={() => {
                     setActiveImage(image);
                     setOpen(true);
                   }}
-                ></div>
+                >
+                  <img
+                    src={image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover rounded-md"
+                  />
+                </button>
               </div>
             );
           })}

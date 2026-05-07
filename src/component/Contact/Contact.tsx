@@ -2,8 +2,9 @@ import React from "react";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { FaFax } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { useForm } from "react-hook-form";
-import { SubmitHandler } from "react-hook-form/dist/types";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useCookieConsent } from "../../hooks/useCookieConsent";
 type Props = {};
 interface IFormInput {
   firstName: string;
@@ -12,42 +13,63 @@ interface IFormInput {
   message: string;
   email: string;
 }
+const CONTACT_EMAIL = "olympicjoin@gmail.com";
 const Contact = (props: Props) => {
+  const { t } = useTranslation();
+  const { consent, accept } = useCookieConsent();
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     formState: { errors },
   } = useForm<IFormInput>();
-  const onSubmit = () => {
-    console.log("nada");
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    const subject = encodeURIComponent(data.subject);
+    const body = encodeURIComponent(
+      `From: ${data.firstName} ${data.lastName} <${data.email}>\n\n${data.message}`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    reset();
   };
   return (
     <div className="h-full relative">
       <div className="pt-[90px]">
         <h4 className="text-center text-3xl text-slate-50 tracking-widest hover-underline-animation font-semibold cursor-pointer lg:px-96">
-          Επικοινωνία
+          {t("contact.title")}
         </h4>
       </div>
       <div className="flex w-screen lg:flex-row flex-col space-x-12 lg:justify-between 2xl:px-64 mt-8">
         <div className="lg:justify-center flex flex-col lg:items-center w-full text-center">
           <h4 className="text-slate-50 text-xl mb-8 tracking-widest">
-            Που θα μας βρείτε
+            {t("contact.where")}
           </h4>
           <div className="mapouter">
             <div className="gmap_canvas">
-              <iframe
-                height="500"
-                id="gmap_canvas"
-                className="rounded-xl lg:w-[600px] w-[350px] mx-auto"
-                src="https://maps.google.com/maps?q=54,%20Methonis%20Street%20Pireas&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              ></iframe>
+              {consent === "accepted" ? (
+                <iframe
+                  title="Olympic Join Hellas location map"
+                  height="500"
+                  id="gmap_canvas"
+                  loading="lazy"
+                  className="rounded-xl lg:w-[600px] w-[350px] mx-auto"
+                  src="https://maps.google.com/maps?q=54,%20Methonis%20Street%20Pireas&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                ></iframe>
+              ) : (
+                <div className="rounded-xl lg:w-[600px] w-[350px] h-[500px] mx-auto bg-slate-200 flex flex-col justify-center items-center text-center px-6 gap-4">
+                  <p className="text-slate-700">{t("map.consentRequired")}</p>
+                  <button
+                    onClick={accept}
+                    className="px-4 py-2 rounded-md bg-[#326da8] text-slate-50 font-semibold hover:bg-[#274f7a] transition-colors duration-300"
+                  >
+                    {t("map.loadMap")}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           <div className="mt-8">
             <h4 className="text-slate-50 text-xl tracking-widest">
-              Στοιχεία Επικοινωνίας
+              {t("contact.details")}
             </h4>
             <div className="flex flex-row justify-center items-center mt-2 space-x-2">
               <BsFillTelephoneFill color="white" />
@@ -79,11 +101,11 @@ const Contact = (props: Props) => {
                     {errors.firstName.message}
                   </span>
                 )}
-                
+
                 <input
-                  placeholder="Όνομα"
+                  placeholder={t("contact.form.firstName") as string}
                   {...register("firstName", {
-                    required: "Το όνομα είναι υποχρεωτικό",
+                    required: t("contact.form.errors.firstNameRequired") as string,
                   })}
                   className={`p-2  outline-none rounded-md border-2 ${
                     errors.firstName ? "border-2 border-red-500" : ""
@@ -97,9 +119,9 @@ const Contact = (props: Props) => {
                   </span>
                 )}
                 <input
-                  placeholder="Επώνυμο"
+                  placeholder={t("contact.form.lastName") as string}
                   {...register("lastName", {
-                    required: "Το επώνυμο είναι υποχρεωτικό",
+                    required: t("contact.form.errors.lastNameRequired") as string,
                   })}
                   className={`p-2  outline-none rounded-md border-2 ${
                     errors.lastName ? "border-2 border-red-500" : ""
@@ -108,35 +130,35 @@ const Contact = (props: Props) => {
               </div>
             </div>
             <div className="flex flex-col">
-              {errors.lastName && (
+              {errors.email && (
                 <span role="alert" className=" text-red-600 text-center">
-                  {errors.lastName.message}
+                  {errors.email.message}
                 </span>
               )}
               <input
-                placeholder="Email"
+                placeholder={t("contact.form.email") as string}
                 {...register("email", {
-                  required: "Το email είναι υποχρεωτικό",
+                  required: t("contact.form.errors.emailRequired") as string,
                   pattern: {
                     value: /\S+@\S+\.\S+/,
-                    message: "Μη έγκυρο email.",
+                    message: t("contact.form.errors.emailInvalid") as string,
                   },
                 })}
                 className={`p-2  outline-none rounded-md border-2 ${
-                  errors.lastName ? "border-2 border-red-500" : ""
+                  errors.email ? "border-2 border-red-500" : ""
                 }`}
               />
             </div>
             <div className="flex flex-col">
-              {errors.lastName && (
+              {errors.subject && (
                 <span role="alert" className=" text-red-600 text-center">
-                  {errors.lastName.message}
+                  {errors.subject.message}
                 </span>
               )}
               <input
-                placeholder="Θεμα"
+                placeholder={t("contact.form.subject") as string}
                 {...register("subject", {
-                  required: "Το θέμα είναι υποχρεωτικό",
+                  required: t("contact.form.errors.subjectRequired") as string,
                 })}
                 className={`p-2  outline-none rounded-md border-2 ${
                   errors.subject ? "border-2 border-red-500" : ""
@@ -151,12 +173,12 @@ const Contact = (props: Props) => {
                 </span>
               )}
               <textarea
-                placeholder="Μηνυμα..."
+                placeholder={t("contact.form.message") as string}
                 {...register("message", {
-                  required: "Το μήνυμα είναι υποχρεωτικό",
+                  required: t("contact.form.errors.messageRequired") as string,
                 })}
                 className={`p-2  outline-none rounded-md border-2 ${
-                  errors.subject ? "border-2 border-red-500" : ""
+                  errors.message ? "border-2 border-red-500" : ""
                 }`}
               />
             </div>
@@ -165,7 +187,7 @@ const Contact = (props: Props) => {
               type="submit"
               className="bg-slate-50 py-4 mx-auto block rounded-md text-gray-900 px-12 mt-4 hover:bg-[#326da8] hover:text-slate-50 transition-all duration-500"
             >
-              Αποστολή
+              {t("contact.form.send")}
             </button>
           </form>
         </div>

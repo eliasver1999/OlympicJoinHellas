@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(npm install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s -o /dev/null -w \"JS: %{http_code} %{size_download} bytes\\\\n\" \"http://localhost:3000/src/index.tsx\")",
+      "Bash(curl -s -o /dev/null -w \"logo: %{http_code}\\\\n\" http://localhost:3000/logo.png)",
+      "Bash(npm audit *)"
+    ]
+  }
+}

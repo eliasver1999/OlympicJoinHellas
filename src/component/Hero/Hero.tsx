@@ -4,7 +4,7 @@ import { Cursor } from "react-simple-typewriter";
 import "./Links.css";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 type Props = {};
 const starting = {
   hidden: {
@@ -24,40 +24,45 @@ const starting = {
     transition: { delay: 0.1, type: "linear", y: { duration: 0.4 } },
   },
 };
-const Hero = (props: Props) => {
-  const [text, count] = useTypewriter({
-    words: [
-      "Καλώς ήρθατε στην Olympic Join Hellas",
-      "Σωληνουργικές εργασίες",
-      "Επισκευές Boiler - Λέβητες (Καζάνια)",
-      "Επισκευές Inert Gas Generator",
-      "Μονώσεις πλοίων",
-      "Εξαερισμός",
-      "Ειδικές Κατασκευές",
-    ],
+
+const TypewriterText = ({ words }: { words: string[] }) => {
+  const [text] = useTypewriter({
+    words,
     loop: true,
     delaySpeed: 2000,
   });
   return (
+    <>
+      <span className="text-slate-600 tracking-wider">{text}</span>
+      <Cursor cursorColor="#326da8" />
+    </>
+  );
+};
+
+const Hero = (props: Props) => {
+  const { t, i18n } = useTranslation();
+  const words = t("hero.typewriter", { returnObjects: true }) as string[];
+  return (
     <div className="flex flex-col justify-center items-center h-full ">
       {" "}
       <h1 className="text-3xl lg:text-start text-center lg:text-6xl font-semibold lg:px-10">
-        <span className="text-slate-600 tracking-wider">{text}</span>
-        <Cursor cursorColor="#326da8" />
+        <TypewriterText key={i18n.language} words={words} />
       </h1>
       <div className="lg:flex hidden flex-row bottom-32 absolute justify-between lg:w-1/2 tracking-wide font-semibold ">
-        <h4 className="cursor-pointer hover-underline-animation">ΑΡΧΙΚΗ</h4>
+        <h4 className="cursor-pointer hover-underline-animation">
+          {t("nav.home")}
+        </h4>
         <a className="cursor-pointer hover-underline-animation" href="#about">
-          ΠΟΙΟΙ ΕΙΜΑΣΤΕ
+          {t("nav.about")}
         </a>
         <a
           className="cursor-pointer hover-underline-animation"
           href="#services"
         >
-          ΥΠΗΡΕΣΙΕΣ
+          {t("nav.services")}
         </a>
         <a className="cursor-pointer hover-underline-animation" href="#contact">
-          ΕΠΙΚΟΙΝΩΝΙΑ
+          {t("nav.contact")}
         </a>
       </div>
       <div className="absolute bottom-12">

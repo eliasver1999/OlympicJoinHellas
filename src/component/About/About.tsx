@@ -8,25 +8,22 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Image from "../ImageComponent/Image";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 type Props = {};
 
 const About = (props: Props) => {
+  const { t } = useTranslation();
   return (
     <div className="h-full relative">
       <div className="pt-[90px]">
         <h4 className="text-center lg:text-3xl text-2xl text-slate-50 tracking-widest hover-underline-animation font-semibold cursor-pointer lg:px-96">
-          Ποιοι Είμαστε
+          {t("about.title")}
         </h4>
         <h5 className="lg:px-96 px-2 lg:mt-12 mt-4 lg:text-xl text-center text-slate-50  tracking-wider">
-          Με την Olympic Join Hellas επιθυμούμε να σας γνωρίσουμε την εταιρεία
-          μας η οποία λειτουργεί από το 1978 και αναλαμβάνει επισκευές πλοίων,
-          ειδικότερα δε ελασματουργικές και σωληνουργικές εργασίες, καθώς επίσης
-          κατασκευή αεραγωγών, μονώσεων και λεβήτων σε όλους τους τύπους πλοίων.
+          {t("about.description1")}
         </h5>
         <h5 className="lg:px-0 px-2  lg:mt-24 mt-4 lg:text-xl text-center text-slate-50  tracking-wider">
-          Συνεργαζόμαστε με πολλές Ναυτιλιακές Εταιρείες και οι εργασίες μας
-          διακρίθηκαν για την ποιότητα, τον γρήγορο χρόνο παράδοσης και το
-          χαμηλό κόστος.
+          {t("about.description2")}
         </h5>
       </div>
       <div className="bottom-12 absolute w-screen px-12 lg:flex hidden flex-row justify-center items-center">
@@ -43,8 +40,6 @@ const About = (props: Props) => {
             nextEl: ".review-swiper-button-next",
             prevEl: ".review-swiper-button-prev",
           }}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
           className="lg:mx-32 lg:px-32"
         >
           <SwiperSlide className="mr-0">
@@ -84,8 +79,6 @@ const About = (props: Props) => {
             nextEl: ".review-swiper-button-next",
             prevEl: ".review-swiper-button-prev",
           }}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
           className="lg:mx-32 lg:px-32"
         >
           <SwiperSlide className="mr-0">

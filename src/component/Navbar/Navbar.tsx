@@ -1,4 +1,5 @@
 import React from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 import ModernNav from "./ModernNav";
 
 type Props = {};
@@ -16,6 +17,7 @@ const Navbar = (props: Props) => {
       </div>
       <div>
         <ModernNav />
+        <LanguageSwitcher />
       </div>
     </div>
   );
